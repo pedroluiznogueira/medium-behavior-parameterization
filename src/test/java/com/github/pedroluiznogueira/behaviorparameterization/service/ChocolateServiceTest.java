@@ -15,7 +15,7 @@ public class ChocolateServiceTest {
     private final Chocolate chocoThree = new Chocolate("bitter", 300);
     private final Chocolate chocoFour = new Chocolate("bitter", 400);
     private final Chocolate chocoFive = new Chocolate("milk", 600);
-    private final List<Chocolate> chocos = List.of(chocoOne, chocoTwo, chocoThree, chocoFour, chocoFive);
+    private final List<Chocolate> mockedChocos = List.of(chocoOne, chocoTwo, chocoThree, chocoFour, chocoFive);
     private final ChocolateDark<Chocolate> predicate = new ChocolateDark<>();
 
     @Test
@@ -24,8 +24,8 @@ public class ChocolateServiceTest {
         Integer expectedAmountOfChocos = 2;
 
         // act
-        List<Chocolate> bitterChocos = ChocolateService.filterBitterChocolates(chocos);
-        Integer actualAmountOfChocos = bitterChocos.size();
+        List<Chocolate> chocos = ChocolateService.filterBitterChocolates(mockedChocos);
+        Integer actualAmountOfChocos = chocos.size();
 
         // assert
         assertEquals(expectedAmountOfChocos, actualAmountOfChocos);
@@ -37,8 +37,8 @@ public class ChocolateServiceTest {
         Integer expectedAmountOfChocos = 1;
 
         // act
-        List<Chocolate> bitterChocos = ChocolateService.filterChocolatesByType(chocos, "dark");
-        Integer actualAmountOfChocos = bitterChocos.size();
+        List<Chocolate> chocos = ChocolateService.filterChocolatesByType(mockedChocos, "dark");
+        Integer actualAmountOfChocos = chocos.size();
 
         // assert
         assertEquals(expectedAmountOfChocos, actualAmountOfChocos);
@@ -50,8 +50,8 @@ public class ChocolateServiceTest {
         Integer expectedAmountOfChocos = 3;
 
         // act
-        List<Chocolate> bitterChocos = ChocolateService.filterChocolatesByWeight(chocos, 200);
-        Integer actualAmountOfChocos = bitterChocos.size();
+        List<Chocolate> chocos = ChocolateService.filterChocolatesByWeight(mockedChocos, 200);
+        Integer actualAmountOfChocos = chocos.size();
 
         // assert
         assertEquals(expectedAmountOfChocos, actualAmountOfChocos);
@@ -63,8 +63,8 @@ public class ChocolateServiceTest {
         Integer expectedAmountOfChocos = 1;
 
         // act
-        List<Chocolate> bitterChocos = ChocolateService.filterChocolatesByAnyAttribute(chocos, "white", 0, false);
-        Integer actualAmountOfChocos = bitterChocos.size();
+        List<Chocolate> chocos = ChocolateService.filterChocolatesByAnyAttribute(mockedChocos, "white", 0, false);
+        Integer actualAmountOfChocos = chocos.size();
 
         // assert
         assertEquals(expectedAmountOfChocos, actualAmountOfChocos);
@@ -76,8 +76,8 @@ public class ChocolateServiceTest {
         Integer expectedAmountOfChocos = 4;
 
         // act
-        List<Chocolate> bitterChocos = ChocolateService.filterChocolatesByAnyAttribute(chocos, "", 100, true);
-        Integer actualAmountOfChocos = bitterChocos.size();
+        List<Chocolate> chocos = ChocolateService.filterChocolatesByAnyAttribute(mockedChocos, "", 100, true);
+        Integer actualAmountOfChocos = chocos.size();
 
         // assert
         assertEquals(expectedAmountOfChocos, actualAmountOfChocos);
@@ -89,8 +89,25 @@ public class ChocolateServiceTest {
         Integer expectedAmountOfChocos = 1;
 
         // act
-        List<Chocolate> bitterChocos = ChocolateService.filterChocolatesWithAbstraction(chocos, predicate);
-        Integer actualAmountOfChocos = bitterChocos.size();
+        List<Chocolate> chocos = ChocolateService.filterChocolatesWithAbstraction(mockedChocos, predicate);
+        Integer actualAmountOfChocos = chocos.size();
+
+        // assert
+        assertEquals(expectedAmountOfChocos, actualAmountOfChocos);
+    }
+
+    @Test
+    public void filterChocolatesWithAbstraction_DarkTypeAnonymousClass() {
+        // arrange
+        Integer expectedAmountOfChocos = 1;
+
+        // act
+        List<Chocolate> chocos = ChocolateService.filterChocolatesWithAbstraction(mockedChocos, new ChocolateDark<>() {
+            public boolean test(Chocolate chocolate) {
+                return chocolate.getType().equals("dark");
+            }
+        });
+        Integer actualAmountOfChocos = chocos.size();
 
         // assert
         assertEquals(expectedAmountOfChocos, actualAmountOfChocos);
