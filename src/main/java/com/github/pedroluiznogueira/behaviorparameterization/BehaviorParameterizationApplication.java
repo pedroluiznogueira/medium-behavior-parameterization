@@ -11,17 +11,7 @@ import java.util.List;
 public class BehaviorParameterizationApplication {
 
 	public static void main(String[] args) {
-		// SpringApplication.run(BehaviorParameterizationApplication.class, args);
-
-		Chocolate chocoOne = new Chocolate("dark", 100);
-		Chocolate chocoTwo = new Chocolate("white", 200);
-		Chocolate chocoThree = new Chocolate("bitter", 300);
-		Chocolate chocoFour = new Chocolate("bitter", 400);
-
-		List<Chocolate> chocos = List.of(chocoOne, chocoTwo, chocoThree, chocoFour);
-
-		List<Chocolate> bitterChocolates = ChocolateService.filterBitterChocolates(chocos);
-		bitterChocolates.forEach(System.out::println);
+		SpringApplication.run(BehaviorParameterizationApplication.class, args);
 	}
 
 }

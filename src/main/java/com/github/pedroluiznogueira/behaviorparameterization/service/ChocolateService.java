@@ -14,4 +14,9 @@ public class ChocolateService {
     public static List<Chocolate> filterBitterChocolates(List<Chocolate> chocolates) {
         return chocolates.stream().filter(chocolate -> chocolate.getType().equals("bitter")).collect(toList());
     }
+
+    public static List<Chocolate> filterChocolatesByType(List<Chocolate> chocolates, String type) {
+        return chocolates.stream().filter(chocolate -> chocolate.getType().equals(type)).collect(toList());
+    }
+
 }
