@@ -32,4 +32,8 @@ public class ChocolateService {
     public static List<Chocolate> filterChocolatesWithAbstraction(List<Chocolate> chocolates, ChocolateDark<Chocolate> predicate) {
         return chocolates.stream().filter(predicate).collect(toList());
     }
+
+    public static List<Chocolate> filterChocolatesWithFunctionalInterfaces(List<Chocolate> chocolates, Predicate<Chocolate> predicate) {
+        return chocolates.stream().filter(predicate).collect(toList());
+    }
 }

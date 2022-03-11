@@ -5,6 +5,7 @@ import com.github.pedroluiznogueira.behaviorparameterization.service.implementat
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -107,6 +108,20 @@ public class ChocolateServiceTest {
                 return chocolate.getType().equals("dark");
             }
         });
+        Integer actualAmountOfChocos = chocos.size();
+
+        // assert
+        assertEquals(expectedAmountOfChocos, actualAmountOfChocos);
+    }
+
+    @Test
+    public void filterChocolatesWithFunctionalInterfaces_TypeAndWeight() {
+        // arrange
+        Integer expectedAmountOfChocos = 1;
+        Predicate<Chocolate> predicate = (chocolate) -> chocolate.getWeight() >= 100 && chocolate.getType().equals("dark");
+
+        // act
+        List<Chocolate> chocos = ChocolateService.filterChocolatesWithFunctionalInterfaces(mockedChocos, predicate);
         Integer actualAmountOfChocos = chocos.size();
 
         // assert
