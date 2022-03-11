@@ -1,7 +1,7 @@
 package com.github.pedroluiznogueira.behaviorparameterization.service;
 
 import com.github.pedroluiznogueira.behaviorparameterization.domain.Chocolate;
-import com.github.pedroluiznogueira.behaviorparameterization.service.implementation.ChocolateDark;
+import com.github.pedroluiznogueira.behaviorparameterization.filter.DarkChocolateFilter;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public class ChocolateServiceTest {
     private final Chocolate chocoFour = new Chocolate("bitter", 400);
     private final Chocolate chocoFive = new Chocolate("milk", 600);
     private final List<Chocolate> mockedChocos = List.of(chocoOne, chocoTwo, chocoThree, chocoFour, chocoFive);
-    private final ChocolateDark<Chocolate> predicate = new ChocolateDark<>();
+    private final DarkChocolateFilter<Chocolate> predicate = new DarkChocolateFilter<>();
 
     @Test
     public void filterBitterChocolates() {
@@ -103,7 +103,7 @@ public class ChocolateServiceTest {
         Integer expectedAmountOfChocos = 1;
 
         // act
-        List<Chocolate> chocos = ChocolateService.filterChocolatesWithAbstraction(mockedChocos, new ChocolateDark<>() {
+        List<Chocolate> chocos = ChocolateService.filterChocolatesWithAbstraction(mockedChocos, new DarkChocolateFilter<>() {
             public boolean test(Chocolate chocolate) {
                 return chocolate.getType().equals("dark");
             }
@@ -122,6 +122,19 @@ public class ChocolateServiceTest {
 
         // act
         List<Chocolate> chocos = ChocolateService.filterChocolatesWithFunctionalInterfaces(mockedChocos, predicate);
+        Integer actualAmountOfChocos = chocos.size();
+
+        // assert
+        assertEquals(expectedAmountOfChocos, actualAmountOfChocos);
+    }
+
+    @Test
+    public void filterChocolatesWithLambdas_Type() {
+        // arrange
+        Integer expectedAmountOfChocos = 1;
+
+        // act
+        List<Chocolate> chocos = ChocolateService.filterChocolatesWithFunctionalInterfaces(mockedChocos, (chocolate) -> chocolate.getType().equals("dark"));
         Integer actualAmountOfChocos = chocos.size();
 
         // assert

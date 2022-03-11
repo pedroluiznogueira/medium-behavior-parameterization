@@ -10,7 +10,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Chocolate implements Candy {
-    private String type;
+public class Cake implements Candy {
+    private String flavor;
     private Integer weight;
 }

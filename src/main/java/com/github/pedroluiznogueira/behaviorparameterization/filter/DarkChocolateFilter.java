@@ -1,10 +1,10 @@
-package com.github.pedroluiznogueira.behaviorparameterization.service.implementation;
+package com.github.pedroluiznogueira.behaviorparameterization.filter;
 
 import com.github.pedroluiznogueira.behaviorparameterization.domain.Chocolate;
 
 import java.util.function.Predicate;
 
-public class ChocolateDark<T> implements Predicate<T> {
+public class DarkChocolateFilter<T> implements Predicate<T> {
 
     @Override
     public boolean test(T t) {

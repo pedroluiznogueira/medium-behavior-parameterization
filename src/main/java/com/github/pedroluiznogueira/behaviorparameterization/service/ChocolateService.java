@@ -1,7 +1,7 @@
 package com.github.pedroluiznogueira.behaviorparameterization.service;
 
 import com.github.pedroluiznogueira.behaviorparameterization.domain.Chocolate;
-import com.github.pedroluiznogueira.behaviorparameterization.service.implementation.ChocolateDark;
+import com.github.pedroluiznogueira.behaviorparameterization.filter.DarkChocolateFilter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,11 +29,15 @@ public class ChocolateService {
         return chocolates.stream().filter(chocolate -> chocolate.getType().equals(type)).collect(toList());
     }
 
-    public static List<Chocolate> filterChocolatesWithAbstraction(List<Chocolate> chocolates, ChocolateDark<Chocolate> predicate) {
+    public static List<Chocolate> filterChocolatesWithAbstraction(List<Chocolate> chocolates, DarkChocolateFilter<Chocolate> predicate) {
         return chocolates.stream().filter(predicate).collect(toList());
     }
 
     public static List<Chocolate> filterChocolatesWithFunctionalInterfaces(List<Chocolate> chocolates, Predicate<Chocolate> predicate) {
+        return chocolates.stream().filter(predicate).collect(toList());
+    }
+
+    public static List<Chocolate> filterChocolatesWithLambdas(List<Chocolate> chocolates, Predicate<Chocolate> predicate) {
         return chocolates.stream().filter(predicate).collect(toList());
     }
 }
