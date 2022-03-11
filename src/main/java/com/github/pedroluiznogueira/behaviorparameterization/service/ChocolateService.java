@@ -19,4 +19,12 @@ public class ChocolateService {
         return chocolates.stream().filter(chocolate -> chocolate.getType().equals(type)).collect(toList());
     }
 
+    public static List<Chocolate> filterChocolatesByWeight(List<Chocolate> chocolates, Integer weight) {
+        return chocolates.stream().filter(chocolate -> chocolate.getWeight() > weight).collect(toList());
+    }
+
+    public static List<Chocolate> filterChocolatesByAnyAttribute(List<Chocolate> chocolates, String type, Integer weight, Boolean flag) {
+        if (flag) return chocolates.stream().filter(chocolate -> chocolate.getWeight() > weight).collect(toList());
+        return chocolates.stream().filter(chocolate -> chocolate.getType().equals(type)).collect(toList());
+    }
 }

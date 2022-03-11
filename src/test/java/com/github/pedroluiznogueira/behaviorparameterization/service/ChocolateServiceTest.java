@@ -42,4 +42,42 @@ public class ChocolateServiceTest {
         assertEquals(expectedAmountOfBitterChocos, actualAmountOfBitterChocos);
     }
 
+    @Test
+    public void filterChocolatesByWeight() {
+        // arrange
+        Integer expectedAmountOfBitterChocos = 3;
+
+        // act
+        List<Chocolate> bitterChocos = ChocolateService.filterChocolatesByWeight(chocos, 200);
+        Integer actualAmountOfBitterChocos = bitterChocos.size();
+
+        // assert
+        assertEquals(expectedAmountOfBitterChocos, actualAmountOfBitterChocos);
+    }
+
+    @Test
+    public void filterChocolatesByAnyAttribute_Type() {
+        // arrange
+        Integer expectedAmountOfBitterChocos = 1;
+
+        // act
+        List<Chocolate> bitterChocos = ChocolateService.filterChocolatesByAnyAttribute(chocos, "white", 0, false);
+        Integer actualAmountOfBitterChocos = bitterChocos.size();
+
+        // assert
+        assertEquals(expectedAmountOfBitterChocos, actualAmountOfBitterChocos);
+    }
+
+    @Test
+    public void filterChocolatesByAnyAttribute_Weight() {
+        // arrange
+        Integer expectedAmountOfBitterChocos = 4;
+
+        // act
+        List<Chocolate> bitterChocos = ChocolateService.filterChocolatesByAnyAttribute(chocos, "", 100, true);
+        Integer actualAmountOfBitterChocos = bitterChocos.size();
+
+        // assert
+        assertEquals(expectedAmountOfBitterChocos, actualAmountOfBitterChocos);
+    }
 }
